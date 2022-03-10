@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LatLongWithWidget</string>
+    <string name="app_name">Latitude and Longitude</string>
     <string name="refresh">Refresh</string>
     <string name="action_copy">Copy Coordinates</string>
     <string name="updated">Updated</string>
