@@ -1,13 +1,21 @@
 package com.amandaroos.latlongwithwidget
 
 import android.Manifest
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,5 +58,41 @@ class MainActivity : AppCompatActivity() {
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
             RequestPermissionCode
         )
+    }
+
+    fun buttonClicked(view: View) {
+        getLastLocation()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.action_copy -> {
+                val coordinates = "${latitude.text}, ${longitude.text}"
+
+                val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("text", coordinates)
+                clipboard.setPrimaryClip(clip)
+                true
+            }
+            R.id.action_clear -> {
+                longitude.text = ""
+                latitude.text = ""
+                time.text = ""
+                date.text = ""
+                true
+            }
+            R.id.action_donate ->{
+                val intent = Intent(this@MainActivity, DonateActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
