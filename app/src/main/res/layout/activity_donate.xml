@@ -101,6 +101,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="goToBlueLink"
+                android:layout_margin="8dp"
                 android:text="@string/small"
                 android:textColor="@android:color/white" />
 
@@ -110,6 +111,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="goToRedLink"
+                android:layout_margin="8dp"
                 android:text="@string/medium"
                 android:textColor="@android:color/white" />
 
@@ -119,6 +121,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="goToBlackLink"
+                android:layout_margin="8dp"
                 android:text="@string/large"
                 android:textColor="@android:color/white" />
         </LinearLayout>
