@@ -1,10 +1,8 @@
 package com.amandaroos.latlongwithwidget
 
 import android.Manifest
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.appwidget.AppWidgetManager
+import android.content.*
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -48,7 +46,20 @@ class MainActivity : AppCompatActivity() {
                         time.text = android.text.format.DateFormat.getTimeFormat(applicationContext).format(location.time)
                         date.text = android.text.format.DateFormat.getDateFormat(getApplicationContext()).format(location.time)
                     }
+                    updateWidget()
                 }
+        }
+    }
+
+    fun updateWidget() {
+        val ids = AppWidgetManager.getInstance(applicationContext).getAppWidgetIds(
+            ComponentName(
+                applicationContext,
+                LatLongAppWidget::class.java
+            )
+        )
+        for (id in ids) {
+            updateAppWidget(applicationContext, AppWidgetManager.getInstance(applicationContext), id, mLocation)
         }
     }
 
